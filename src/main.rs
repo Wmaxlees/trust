@@ -43,9 +43,3 @@ fn handle(e: notify::Event) {
         Err(_) => return,
     }
 }
-
-
-
-
-// TODO: JUST READ IN DIRECTORIES FROM CONFIG FILE
-//       AND MAKE DIRS/FILES IMMUTABLE
