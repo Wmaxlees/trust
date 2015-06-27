@@ -5,3 +5,4 @@ authors = ["W. Max Lees <william.lees@echostar.com>"]
 
 [dependencies]
 notify = "^2.0"
+term = "^0.2.9"

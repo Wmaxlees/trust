@@ -1,4 +1,5 @@
 extern crate notify;
+extern crate term;
 
 use notify::{RecommendedWatcher, Error, Watcher};
 use std::sync::mpsc::channel;
@@ -9,6 +10,11 @@ use std::path::Path;
 use std::process::Command;
 
 fn main() {
+    let mut t_out = term::stdout().unwrap();
+    t_out.fg(term::color::GREEN);
+    println!("\nNow watching ./src");
+    t_out.reset();
+
     let (tx, rx) = channel();
     let w: Result<RecommendedWatcher, Error> = Watcher::new(tx);
 
@@ -38,8 +44,9 @@ fn handle(e: notify::Event) {
                                     .arg("test")
                                     .output()
                                     .unwrap_or_else(|e| { panic!("Failed to execute cargo: {}", e)});
+                                    
             println!("{}", String::from_utf8_lossy(&output.stdout));
         },
-        Err(_) => return,
+        Err(e) => println!("{:?}", e),
     }
 }
